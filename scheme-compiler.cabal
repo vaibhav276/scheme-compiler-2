@@ -17,11 +17,12 @@ category:            Language
 extra-source-files:  CHANGELOG.md
 
 library
-  exposed-modules: Compiler, Main
+  exposed-modules: Compiler, Parser
   -- other-modules:
   -- other-extensions:
   build-depends:       base ^>=4.11.1.0
-  hs-source-dirs:      src, lib
+                       , parsec
+  hs-source-dirs:      lib
   default-language:    Haskell2010
 
 test-suite test
@@ -33,8 +34,10 @@ test-suite test
     tests
   main-is:
     Test.hs
+  other-modules:
+    ParserTests
   build-depends:
-      base >= 4 && < 5
+    base >= 4 && < 5
     , tasty
     , tasty-smallcheck
     , tasty-quickcheck

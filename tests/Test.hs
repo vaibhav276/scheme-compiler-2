@@ -6,7 +6,7 @@ import Test.Tasty.HUnit
 import Data.List
 import Data.Ord
 
-import Compiler
+import ParserTests
 
 main = defaultMain tests
 
@@ -24,7 +24,5 @@ qcProps = testGroup "(checked by QuickCheck)"
   [
   ]
 
-unitTests = testGroup "Unit tests"
-  [ testCase "Compile a string expression" $
-      ( compile "Test expression" ) @?= Nothing
-  ]
+unitTests = testGroup "Unit tests" [parserUnitTests]
+
