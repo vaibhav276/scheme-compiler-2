@@ -28,7 +28,9 @@ parseExpr = parseAtom
             <|> parseNumber
             <|> parseQuoted
             <|> do char '('
+                   many spaces
                    x <- ( try parseList ) <|> parseDottedList
+                   many spaces
                    char ')'
                    return x
 
@@ -44,7 +46,8 @@ parseString = do char '"'
 -- | parses atoms
 -- which is a letter or symbol, followed by any number of letters, digits or symbols
 parseAtom :: Parser LispVal
-parseAtom = do first <- letter <|> symbol
+parseAtom = do many spaces
+               first <- letter <|> symbol
                rest <- many ( letter <|> digit <|> symbol )
                let atom = [first] ++ rest
                return $ case atom of
